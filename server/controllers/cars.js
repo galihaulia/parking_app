@@ -108,18 +108,21 @@ exports.carOut = (req, res, next) => {
     if (findCar) {
       let tgl_aw = moment(findCar.enterDate)
       let tgl_ak = moment(now)
-      let hours
-      let pay
+      let hours, temp, payAfter, pay
 
       switch (findCar.type) {
         case 'SUV':
           hours = tgl_ak.diff(tgl_aw, 'hours')
-          pay = hours * 25000
+          temp = hours - 1
+          payAfter = 25000 * (20 / 100)
+          pay = 25000 + temp * (25000 - payAfter)
           break
 
         case 'MPV':
           hours = tgl_ak.diff(tgl_aw, 'hours')
-          pay = hours * 35000
+          temp = hours - 1
+          payAfter = 35000 * (20 / 100)
+          pay = 35000 + temp * (35000 - payAfter)
           break
 
         default:
